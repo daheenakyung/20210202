@@ -47,7 +47,7 @@ tr.row:hover {
 			</tr>
 			<c:forEach var = "vo" items="${list }">
 			<tr class="row">
-				<td align="center">${vo.bCode }</td>
+				<td align="center" >${vo.bCode }</td>
 				<td align="center">${vo.bName }</td>
 				<td align="center">${vo.quanti }</td>
 				<td align="center">${vo.bCount }</td>

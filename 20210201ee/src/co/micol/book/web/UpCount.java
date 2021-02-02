@@ -21,14 +21,12 @@ public class UpCount implements Command {
 		vo.setbCode(requset.getParameter("row"));
 		
 		int n = dao.upCount(vo);
-		
+		//insert
 		BookRentalVo vb = new BookRentalVo();
-		vb.setbCode(requset.getParameter("bCode"));
-		vb.setmId(requset.getParameter("mId"));
-		vb.setReturnDate(Date.valueOf(requset.getParameter("returnDate")));
+		vb.setbCode(requset.getParameter("vo.bCode"));
 		dao = new BookRentalDao();
 		n = dao.insertR(vb);
-		
+		System.out.println(requset.getParameter("mId"));
 		
 		return "bookForm.do";
 	}
