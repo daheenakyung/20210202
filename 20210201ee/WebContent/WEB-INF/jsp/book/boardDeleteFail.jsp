@@ -6,7 +6,7 @@
 <div class="w3-content" style="max-width: 2000px; margin-top: 46px"
 	align="center">
 	<div align="center">
-		<h3>삭제 성공</h3>
+		<h3>삭제 성공!</h3>
 		<button type="button" onclick="location.href='bookForm.do'">목록가기</button>
 	</div>
 </div>
