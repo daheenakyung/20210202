@@ -6,14 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import co.micol.book.common.DAO;
-import co.micol.book.vo.BookVo;
 import co.micol.book.vo.MemberVo;
 
 public class MemberDao extends DAO {
 	private PreparedStatement psmt;
 	private ResultSet rs;
 
-	// �쉶�썝 �쟾泥� 議고쉶
+	// 전체조회
 	public ArrayList<MemberVo> selectMemList() {
 		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
 		String sql = "SELECT * FROM MEM";
@@ -27,6 +26,7 @@ public class MemberDao extends DAO {
 				vo.setmName(rs.getString("MEMBERNAME"));
 				vo.setmTel(rs.getString("MEMBERTEL"));
 				vo.setmAdd(rs.getString("MEMBERADDRESS"));
+				vo.setmAu(rs.getString("MEMBERAU"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -59,7 +59,7 @@ public class MemberDao extends DAO {
 		return vo;
 	} 
 
-	// �쉶�썝 �벑濡� - �궗�슜�옄媛� �븷 �닔 �엳寃�
+	// 회원가입
 	public int insert(MemberVo vo) {
 		String sql = "INSERT INTO MEM(MEMBERID, MEMBERNAME, MEMBERPASSWORD, MEMBERTEL, MEMBERADDRESS) VALUES (?, ?, ?, ?, ?)";
 		int n = 0;
@@ -80,16 +80,15 @@ public class MemberDao extends DAO {
 		return n;
 	}
 
-	// �쉶�썝 �닔�젙 - 愿�由ъ옄
+	// 회원수정
 	public int update(MemberVo vo) {
-		String sql = "UPDATE MEM SET MEMBERPASSWORD = ?, MEMBERTEL=?, MEMBERADDRESS = ? WHERE MEMBERID = ?";
+		String sql = "UPDATE MEM SET MEMBERTEL=?, MEMBERADDRESS = ? WHERE MEMBERID = ?";
 		int n = 0;
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getmPass());
-			psmt.setString(2, vo.getmTel());
-			psmt.setString(3, vo.getmAdd());
-			psmt.setString(4, vo.getmId());
+			psmt.setString(1, vo.getmTel());
+			psmt.setString(2, vo.getmAdd());
+			psmt.setString(3, vo.getmId());
 			n = psmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -100,7 +99,7 @@ public class MemberDao extends DAO {
 		return n;
 	}
 
-	// �쉶�썝 �궘�젣 - 愿�由ъ옄
+	// 회원삭제
 	public int delete(MemberVo vo) {
 		String sql = "DELETE FROM MEM WHERE MEMBERID =?";
 		int n = 0;
@@ -116,7 +115,7 @@ public class MemberDao extends DAO {
 		return n;
 	}
 
-	// 濡쒓렇�씤
+	// 로그인
 	public MemberVo login(MemberVo vo) {
 		String sql = "SELECT * FROM MEM WHERE MEMBERID = ?";
 		try {
@@ -136,8 +135,8 @@ public class MemberDao extends DAO {
 		return vo;
 	}
 
-	// �븘�씠�뵒 以묐났 泥댄겕
-	public boolean isIdCheck(String id) { // id以묐났泥댄겕瑜� �쐞�븳 硫붿냼�뱶
+	// 중복체크
+	public boolean isIdCheck(String id) { 
 		boolean bool = true;
 		String sql = "SELECT MEMBERID FROM MEMR WHERE MEMBERID = ?";
 		try {

@@ -68,6 +68,7 @@ public class FrontController extends HttpServlet {
 		map.put("/memUpdate.do", new MemUpdate()); //멤버 수정
 		map.put("/masList.do", new MasList()); //관리자 대여관리
 		map.put("/upCount.do", new UpCount()); //대여
+//		map.put("/user.do", new User());	//회원의 대여목록
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

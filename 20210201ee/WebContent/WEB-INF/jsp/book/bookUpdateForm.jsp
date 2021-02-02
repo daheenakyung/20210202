@@ -6,7 +6,7 @@
 </div>
 <div align="center">
 	<div><h1>도서 관리</h1></div>
-	<form id = "frm" name = "frm" action = "bookUpdate.do" method = "post">
+	<form id = "frm" name = "frm" action = "bookUpdate.do?bCode=${vo.bCode }" method = "post">
 		<table border = "1">
 			<tr>
 				<th width="100">도서 코드</th>
@@ -18,7 +18,7 @@
 				<td align="center">${vo.bCode }</td>
 				<td align="center"><input type="text" id = "bName" name = "bName" size = "30" value="${vo.bName }"></td>
 				<td align="center">${vo.quanti }</td>
-				<td align="center"><input type="text" id = "bName" name = "bName" size = "10" value="${vo.bCount }"></td>
+				<td align="center"><input type="text" id = "bCount" name = "bCount" size = "10" value="${vo.bCount }"></td>
 			</tr>
 		</table><br/>
 		<button type="submit">등록</button>&nbsp;&nbsp;&nbsp;

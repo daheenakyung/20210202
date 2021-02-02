@@ -35,19 +35,22 @@ body {
 					class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOGIN</a>
 			</c:if>
 			<c:if test="${not empty mid and mauth !='MASTER'}">
-			<a href="bookForm.do"
-				class="w3-bar-item w3-button w3-padding-large w3-hide-small">책 목록</a>
+				<a href="bookForm.do"
+					class="w3-bar-item w3-button w3-padding-large w3-hide-small">책목록</a>
+				<a href="user.do"
+					class="w3-bar-item w3-button w3-padding-large w3-hide-small">내 대여목록</a>
 			</c:if>
 			<div class="w3-dropdown-hover w3-hide-small">
-			<c:if test="${not empty mid and mauth =='MASTER'}">
-				<button class="w3-padding-large w3-button" title="More">도서관리 <i class="fa fa-caret-down"></i>
-				</button>
-				<div class="w3-dropdown-content w3-bar-block w3-card-4">
-					<a href="bookForm.do" class="w3-bar-item w3-button">도서등록</a>
-					<a href="masList.do" class="w3-bar-item w3-button">대여관리</a>
-					<a href="memList.do" class="w3-bar-item w3-button">회원관리</a>
-				</div>
-			</c:if>
+				<c:if test="${not empty mid and mauth =='MASTER'}">
+					<button class="w3-padding-large w3-button" title="More">
+						도서관리 <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a href="bookForm.do" class="w3-bar-item w3-button">도서등록</a> <a
+							href="masList.do" class="w3-bar-item w3-button">대여관리</a> <a
+							href="memList.do" class="w3-bar-item w3-button">회원관리</a>
+					</div>
+				</c:if>
 			</div>
 			<c:if test="${mid ne null }">
 				<a href="logout.do"

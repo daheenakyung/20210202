@@ -14,17 +14,16 @@ public class MemUpdate implements Command {
 		// TODO ����
 		MemberDao dao = new MemberDao();
 		MemberVo vo = new MemberVo();
-		vo.setmPass(requset.getParameter("mPass"));
 		vo.setmTel(requset.getParameter("mTel"));
 		vo.setmAdd(requset.getParameter("mAdd"));
 		vo.setmId(requset.getParameter("mId"));
-		
+
 		int n = dao.update(vo);
 		String viewPage = null;
 		if(n != 0) {
-			viewPage = "member/insertFail";
-		}else {
 			viewPage = "memList.do";
+		}else {
+			viewPage = "member/insertFail";
 		}
 		
 		return viewPage;

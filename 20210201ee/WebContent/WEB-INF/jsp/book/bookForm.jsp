@@ -53,7 +53,7 @@ tr.row:hover {
 				<td align="center"><button type="submit" onclick = "getBook('${vo.bCode}')">대여</button></td>
 				</c:if>
 				<c:if test = "${vo.bCount <= 0}">
-				<td align="center"><button type="button">불가</button></td>
+				<td align="center">대여불가</td>
 				</c:if>
 				<c:if test="${not empty mid and mauth =='MASTER'}">
 				<td align="center"><button type="submit" onclick = "deleteBook('${vo.bCode}')">삭제</button></td>
