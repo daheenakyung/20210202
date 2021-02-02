@@ -18,6 +18,7 @@ import co.micol.book.web.BookUpdateForm;
 import co.micol.book.web.BookDelete;
 import co.micol.book.web.BookForm;
 import co.micol.book.web.InsertForm;
+import co.micol.book.web.UpCount;
 import co.micol.mem.web.MemDelete;
 import co.micol.mem.web.MemInsert;
 import co.micol.mem.web.MemList;
@@ -66,6 +67,7 @@ public class FrontController extends HttpServlet {
 		map.put("/memUpForm.do", new MemUpForm()); //멤버 수정 폼
 		map.put("/memUpdate.do", new MemUpdate()); //멤버 수정
 		map.put("/masList.do", new MasList()); //관리자 대여관리
+		map.put("/upCount.do", new UpCount()); //대여
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

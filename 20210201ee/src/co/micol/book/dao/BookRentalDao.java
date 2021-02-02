@@ -14,7 +14,7 @@ public class BookRentalDao extends DAO{
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	
-	public ArrayList<BookRentalVo> masSelect(MemberVo vm, BookVo vb){
+	public ArrayList<BookRentalVo> masSelect(){
 		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
 		String sql = "SELECT * FROM BOOKRENTAL";
 		BookRentalVo vo;
@@ -23,12 +23,10 @@ public class BookRentalDao extends DAO{
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				vo = new BookRentalVo();
-				vm = new MemberVo();
-				vb = new BookVo();
-				vb.setbCode(rs.getString("b.bcode"));
-				vm.setmId(rs.getString("m.memberid"));
-				vo.setRentalDate(rs.getDate("r.rentaldate"));
-				vo.setReturnDate(rs.getDate("r.returndate"));
+				vo.setbCode(rs.getString("bookcode"));
+				vo.setmId(rs.getString("memberid"));
+				vo.setRentalDate(rs.getDate("rentaldate"));
+				vo.setReturnDate(rs.getDate("returndate"));
 				list.add(vo);
 			}
 		}catch(SQLException e) {

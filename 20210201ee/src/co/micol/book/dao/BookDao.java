@@ -106,6 +106,34 @@ public class BookDao extends DAO {
 		return n;
 	}
 	
+	public int upCount(BookVo vo) {
+	      int n = 0;
+	      String sql = "UPDATE BOOK SET BCOUNT = BCOUNT - 1 WHERE BOOKCODE = ?";
+	      try {
+	         psmt = conn.prepareStatement(sql);
+	         psmt.setString(1, vo.getbCode());
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close();
+	      }
+	      return n;
+	   }
+	   
+	   public int downCount(BookVo vo) {
+	      int n = 0;
+	      String sql = "UPDATE BOOK SET BCOUNT = BCOUNT + 1 WHERE BOOKCODE = ?";
+	      try {
+	         psmt = conn.prepareStatement(sql);
+	         psmt.setString(1, vo.getbCode());
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close();
+	      }
+	      return n;
+	   }
+	
 	private void close() {
 		try {
 			if(rs != null) rs.close();

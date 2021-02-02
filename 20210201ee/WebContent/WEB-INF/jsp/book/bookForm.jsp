@@ -10,7 +10,7 @@ tr.row:hover {
 	function getBook(str){
 		var yn = confirm("도서를 대여하시겠습니까?");
 		if(yn) {
-			frm.action = "upCount.do?row"+str;
+			frm.action = "upCount.do?row="+str;
 			frm.submit();
 		}
 	}
@@ -49,7 +49,12 @@ tr.row:hover {
 				<td align="center">${vo.bName }</td>
 				<td align="center">${vo.quanti }</td>
 				<td align="center">${vo.bCount }</td>
-				<td align="center"><button type="submit" onclick = "getBook()">대여</button></td>
+				<c:if test = "${vo.bCount > 0}">
+				<td align="center"><button type="submit" onclick = "getBook('${vo.bCode}')">대여</button></td>
+				</c:if>
+				<c:if test = "${vo.bCount <= 0}">
+				<td align="center"><button type="button">불가</button></td>
+				</c:if>
 				<c:if test="${not empty mid and mauth =='MASTER'}">
 				<td align="center"><button type="submit" onclick = "deleteBook('${vo.bCode}')">삭제</button></td>
 				<td align="center"><button type="button" onclick = "location.href='bookUpdateFrom.do?row=${vo.bCode }'">수정</button></td>

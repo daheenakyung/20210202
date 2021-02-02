@@ -18,9 +18,7 @@ public class MasList implements Command {
 		// TODO 관리자 대여 폼
 		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
 		BookRentalDao dao = new BookRentalDao();
-		MemberVo vm = new MemberVo();
-		BookVo vb = new BookVo();
-		list = dao.masSelect(vm, vb);
+		list = dao.masSelect();
 		requset.setAttribute("list", list);
 		
 		return "rental/rentalList";
