@@ -1,6 +1,7 @@
 package co.micol.book.common;
 
 import java.io.IOException;
+
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -30,6 +31,7 @@ import co.micol.member.web.Logout;
 import co.micol.member.web.MainCommand;
 import co.micol.member.web.MemberIdCheck;
 import co.micol.member.web.MemberJoin;
+import co.micol.rental.web.MasList;
 
 
 @WebServlet("/FrontController")
@@ -45,24 +47,25 @@ public class FrontController extends HttpServlet {
 	
     public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainCommand());
-		map.put("/loginForm.do", new LoginForm()); //·Î±×ÀÎ
-		map.put("/login.do", new Login()); //·Î±×ÀÎÃ³¸®
-		map.put("/bookForm.do", new BookForm()); //µµ¼­ Æû È£Ãâ
-		map.put("/insertForm.do", new InsertForm()); // »õ µµ¼­ Æû
-		map.put("/bookInsert.do", new BookInsert()); //µî·Ï
-		map.put("/bookDelete.do", new BookDelete()); //»èÁ¦
-		map.put("/bookUpdateFrom.do", new BookUpdateForm()); //Ã¥ ¼öÁ¤ Æû È£Ãâ
-		map.put("/bookUpdate.do", new BookUpdate()); //Ã¥ ¼öÁ¤
-		map.put("/joinForm.do", new JoinForm()); //È¸¿ø°¡ÀÔ Æû È£Ãâ
-		map.put("/memberjoin.do", new MemberJoin());//È¸¿ø°¡ÀÔ¿Ï·á
-		map.put("/idCheck.do", new MemberIdCheck());//¾ÆÀÌµğ Ã¼Å©
-		map.put("/logout.do", new Logout());  //·Î±×¾Æ¿ô
-		map.put("/memList.do", new MemList()); //È¸¿ø Á¶È¸
-		map.put("/memDelete.do", new MemDelete()); //È¸¿ø »èÁ¦
-		map.put("/meminForm.do", new MeminForm()); //¸â¹ö Ãß°¡ Æû
-		map.put("/memInsert.do", new MemInsert()); //¸â¹ö Ãß°¡
-		map.put("/memUpForm.do", new MemUpForm()); //¸â¹ö ¼öÁ¤ Æû
-		map.put("/memUpdate.do", new MemUpdate()); //¸â¹ö ¼öÁ¤
+		map.put("/loginForm.do", new LoginForm()); //ë¡œê·¸ì¸
+		map.put("/login.do", new Login()); //ë¡œê·¸ì¸ì²˜ë¦¬
+		map.put("/bookForm.do", new BookForm()); //ë„ì„œ í¼ í˜¸ì¶œ
+		map.put("/insertForm.do", new InsertForm()); // ìƒˆ ë„ì„œ í¼
+		map.put("/bookInsert.do", new BookInsert()); //ë“±ë¡
+		map.put("/bookDelete.do", new BookDelete()); //ì‚­ì œ
+		map.put("/bookUpdateFrom.do", new BookUpdateForm()); //ì±… ìˆ˜ì • í¼ í˜¸ì¶œ
+		map.put("/bookUpdate.do", new BookUpdate()); //ì±… ìˆ˜ì •
+		map.put("/joinForm.do", new JoinForm()); //íšŒì›ê°€ì… í¼ í˜¸ì¶œ
+		map.put("/memberjoin.do", new MemberJoin());//íšŒì›ê°€ì…ì™„ë£Œ
+		map.put("/idCheck.do", new MemberIdCheck());//ì•„ì´ë”” ì²´í¬
+		map.put("/logout.do", new Logout());  //ë¡œê·¸ì•„ì›ƒ
+		map.put("/memList.do", new MemList()); //íšŒì› ì¡°íšŒ
+		map.put("/memDelete.do", new MemDelete()); //íšŒì› ì‚­ì œ
+		map.put("/meminForm.do", new MeminForm()); //ë©¤ë²„ ì¶”ê°€ í¼
+		map.put("/memInsert.do", new MemInsert()); //ë©¤ë²„ ì¶”ê°€
+		map.put("/memUpForm.do", new MemUpForm()); //ë©¤ë²„ ìˆ˜ì • í¼
+		map.put("/memUpdate.do", new MemUpdate()); //ë©¤ë²„ ìˆ˜ì •
+		map.put("/masList.do", new MasList()); //ê´€ë¦¬ì ëŒ€ì—¬ê´€ë¦¬
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

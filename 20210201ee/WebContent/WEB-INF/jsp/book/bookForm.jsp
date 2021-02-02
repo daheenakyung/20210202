@@ -7,8 +7,12 @@ tr.row:hover {
 }
 </style>   
 <script type="text/javascript">
-	function getBook(){
-		alert("도서를 대여하시겠습니까?");
+	function getBook(str){
+		var yn = confirm("도서를 대여하시겠습니까?");
+		if(yn) {
+			frm.action = "upCount.do?row"+str;
+			frm.submit();
+		}
 	}
 	
 	function deleteBook(str){
