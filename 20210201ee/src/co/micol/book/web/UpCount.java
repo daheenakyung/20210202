@@ -2,6 +2,7 @@ package co.micol.book.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.micol.book.common.Command;
 import co.micol.book.dao.BookRentalDao;

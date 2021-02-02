@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.micol.book.common.Command;
 import co.micol.book.dao.BookRentalDao;
 import co.micol.book.vo.BookRentalVo;
-import co.micol.book.vo.BookVo;
-import co.micol.book.vo.MemberVo;
+
 
 public class MasList implements Command {
 
