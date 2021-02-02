@@ -11,7 +11,7 @@
 	<form id = "frm" name = "frm" action = "books.do" method = "post">
 		<table border = "1">
 			<tr style="background-color : silver">
-				<th width="100">책 제목</th>
+				<th width="100">책 번호</th>
 				<th width="100">회원 아이디</th>
 				<th width="100">대여일자</th>
 				<th width="100">반납일자</th>

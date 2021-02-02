@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import co.micol.book.common.DAO;
 import co.micol.book.vo.BookRentalVo;
 import co.micol.book.vo.BookVo;
-import co.micol.book.vo.MemberVo;
 
 public class BookRentalDao extends DAO{
 	private PreparedStatement psmt;
@@ -38,11 +37,13 @@ public class BookRentalDao extends DAO{
 		return list;
 	}
 	
-	public BookRentalVo selMem(BookRentalVo vo) {
-		String sql = "SELECT A.MEMBERNAME, B.* FROM MEM A, BOOKRENTAL B WHERE A.MEMBERID = B.MEMBERID AND A.MEMBERID = ?";
+	public ArrayList<BookRentalVo> selMem(String id) {
+		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
+		BookRentalVo vo = new BookRentalVo();
+		String sql = "SELECT * FROM MEM A, BOOKRENTAL B WHERE A.MEMBERID = B.MEMBERID AND A.MEMBERID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getmId());
+			psmt.setString(1, id);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				vo = new BookRentalVo();
@@ -50,13 +51,14 @@ public class BookRentalDao extends DAO{
 				vo.setbCode(rs.getString("bookcode"));
 				vo.setmId(rs.getString("memberid"));
 				vo.setReturnDate(rs.getDate("returndate"));
+				list.add(vo);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return vo;
+		return list;
 	}
 	
 		
@@ -106,6 +108,23 @@ public class BookRentalDao extends DAO{
 	      }
 	      return n;
 	   }
+	
+	public int insertR(BookRentalVo vo) {
+		int n = 0;
+		String sql = "insert into bookrental(booknumber, bookcode, memberid, rentaldate) values(bookseq.nextval, ?, ?, ?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getbCode());
+			psmt.setString(2, vo.getmId());
+			psmt.setDate(3, vo.getReturnDate());
+			n = psmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return n ;
+	}
 	
 	
 	private void close() {

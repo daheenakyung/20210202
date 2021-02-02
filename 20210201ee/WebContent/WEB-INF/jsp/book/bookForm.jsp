@@ -36,7 +36,9 @@ tr.row:hover {
 				<th width="100">도서명</th>
 				<th width="100">기본 수량</th>
 				<th width="100">현재 수량</th>
+				<c:if test="${mauth =='USER'}">
 				<th width="100">대여</th>
+				</c:if>
 				<c:if test="${not empty mid and mauth =='MASTER'}">
 				<th width="100">삭제</th>
 				<th width="100">수정</th>
@@ -49,11 +51,13 @@ tr.row:hover {
 				<td align="center">${vo.bName }</td>
 				<td align="center">${vo.quanti }</td>
 				<td align="center">${vo.bCount }</td>
+				<c:if test="${mauth =='USER'}">
 				<c:if test = "${vo.bCount > 0}">
 				<td align="center"><button type="submit" onclick = "getBook('${vo.bCode}')">대여</button></td>
 				</c:if>
 				<c:if test = "${vo.bCount <= 0}">
 				<td align="center">대여불가</td>
+				</c:if>
 				</c:if>
 				<c:if test="${not empty mid and mauth =='MASTER'}">
 				<td align="center"><button type="submit" onclick = "deleteBook('${vo.bCode}')">삭제</button></td>

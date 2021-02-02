@@ -3,6 +3,7 @@ package co.micol.book.vo;
 import java.sql.Date;
 
 public class BookRentalVo {
+	private int bookN;
 	private Date rentalDate;
 	private String bCode;
 	private String mId;
@@ -31,6 +32,12 @@ public class BookRentalVo {
 	}
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
+	}
+	public int getBookN() {
+		return bookN;
+	}
+	public void setBookN(int bookN) {
+		this.bookN = bookN;
 	}
 	
 	
