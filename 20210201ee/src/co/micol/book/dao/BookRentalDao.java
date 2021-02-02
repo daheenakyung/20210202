@@ -38,13 +38,8 @@ public class BookRentalDao extends DAO{
 		return list;
 	}
 	
-	public BookRentalVo selMem(BookRentalVo vo, MemberVo vm) {
-		String sql = "select m.memberid, m.membername, b.bookcode, r.rentaldate, r.returndate\r\n"
-				+ "from book b JOIN bookrental r\r\n"
-				+ "ON(b.bookcode = r.bookcode)\r\n"
-				+ "JOIN mem m\r\n"
-				+ "ON(m.memberid = r.memberid)\r\n"
-				+ "where m.memberid = ?";
+	public BookRentalVo selMem(BookRentalVo vo) {
+		String sql = "SELECT A.MEMBERNAME, B.* FROM MEM A, BOOKRENTAL B WHERE A.MEMBERID = B.MEMBERID AND A.MEMBERID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getmId());
@@ -53,7 +48,7 @@ public class BookRentalDao extends DAO{
 				vo = new BookRentalVo();
 				vo.setRentalDate(rs.getDate("rentaldate"));
 				vo.setbCode(rs.getString("bookcode"));
-				vm.setmId(rs.getString("memberid"));
+				vo.setmId(rs.getString("memberid"));
 				vo.setReturnDate(rs.getDate("returndate"));
 			}
 		}catch(SQLException e) {

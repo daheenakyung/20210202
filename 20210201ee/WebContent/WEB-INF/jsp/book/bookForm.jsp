@@ -31,7 +31,7 @@ tr.row:hover {
 	<div><h1>도서 목록</h1></div>
 	<form id = "frm" name = "frm" method = "post">
 		<table border = "1">
-			<tr>
+			<tr style="background-color : silver">
 				<th width="100">도서 코드</th>
 				<th width="100">도서명</th>
 				<th width="100">기본 수량</th>
@@ -63,9 +63,11 @@ tr.row:hover {
 			</c:forEach>
 		</table>
 	</form>
+	<c:if test="${not empty mid and mauth =='MASTER'}">
 	<div>
 		<button type="button" onclick = "location.href='insertForm.do'">등록</button>
 	</div>
+	</c:if>
 </div>
 
 </body>

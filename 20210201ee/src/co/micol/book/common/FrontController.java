@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.micol.book.web.BookInsert;
 import co.micol.book.web.BookUpdate;
 import co.micol.book.web.BookUpdateForm;
+import co.micol.book.web.DownCount;
 import co.micol.book.web.BookDelete;
 import co.micol.book.web.BookForm;
 import co.micol.book.web.InsertForm;
@@ -32,8 +33,9 @@ import co.micol.member.web.Logout;
 import co.micol.member.web.MainCommand;
 import co.micol.member.web.MemberIdCheck;
 import co.micol.member.web.MemberJoin;
+import co.micol.rental.web.Books;
 import co.micol.rental.web.MasList;
-import co.micol.rental.web.MemBook;
+import co.micol.rental.web.User;
 
 
 @WebServlet("/FrontController")
@@ -69,8 +71,9 @@ public class FrontController extends HttpServlet {
 		map.put("/memUpdate.do", new MemUpdate()); //멤버 수정
 		map.put("/masList.do", new MasList()); //관리자 대여관리
 		map.put("/upCount.do", new UpCount()); //대여
-		map.put("/memBook.do", new MemBook()); //멤버 대여관리
-//		map.put("/user.do", new User());	//회원의 대여목록
+		map.put("/books.do", new Books()); //미반납 도서
+		map.put("/user.do", new User());	//회원의 대여목록
+		map.put("/reBook.do", new DownCount()); //반납
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

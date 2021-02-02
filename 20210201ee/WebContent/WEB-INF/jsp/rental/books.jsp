@@ -7,8 +7,8 @@
 </div>
 
 <div align="center">
-	<div><h1>회원 대여관리</h1></div>
-	<form id = "frm" name = "frm" action = "books.do" method = "post">
+	<div><h1>미반납 도서 목록</h1></div>
+	<form id = "frm" name = "frm" method = "post">
 		<table border = "1">
 			<tr style="background-color : silver">
 				<th width="100">책 제목</th>
@@ -17,15 +17,16 @@
 				<th width="100">반납일자</th>
 			</tr>
 			<c:forEach var = "vo" items="${list }">
+			<c:if test="${vo.returnDate eq null }">
 			<tr>
 				<td align="center">${vo.bCode}</td>
 				<td align="center">${vo.mId}</td>
 				<td align="center">${vo.rentalDate }</td>
 				<td align="center">${vo.returnDate }</td>
 			</tr>
+			</c:if>
 			</c:forEach>
-		</table><br/>
-		<button type="submit">미반납 도서</button>
+		</table>
 	</form>
 </div>
 

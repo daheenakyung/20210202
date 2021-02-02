@@ -9,7 +9,7 @@
 	<div><h1>회원 수정</h1></div>
 	<form id = "frm" name = "frm" action = "memUpdate.do?mId=${vo.mId }" method = "post">
 		<table border = "1">
-			<tr>
+			<tr style="background-color : silver">
 				<th width="100">회원 아이디</th>
 				<th width="100">회원명</th>
 				<th width="100">전화번호</th>
