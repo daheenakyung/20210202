@@ -16,9 +16,11 @@ public class MasList implements Command {
 	@Override
 	public String exec(HttpServletRequest requset, HttpServletResponse response) {
 		// TODO 관리자 대여 폼
-		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
 		BookRentalDao dao = new BookRentalDao();
+		
+		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
 		list = dao.masSelect();
+		
 		requset.setAttribute("list", list);
 		
 		return "rental/rentalList";

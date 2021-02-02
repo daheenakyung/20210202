@@ -16,16 +16,16 @@ public class BookRentalDao extends DAO{
 	
 	public ArrayList<BookRentalVo> masSelect(){
 		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
-		String sql = "SELECT * FROM BOOKRENTAL";
-		BookRentalVo vo;
+		BookRentalVo vo = new BookRentalVo();
+		String sql = "SELECT * FROM MEM A, BOOKRENTAL B WHERE A.MEMBERID = B.MEMBERID";
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				vo = new BookRentalVo();
-				vo.setbCode(rs.getString("bookcode"));
-				vo.setmId(rs.getString("memberid"));
 				vo.setRentalDate(rs.getDate("rentaldate"));
+				vo.setmId(rs.getString("memberid"));
+				vo.setbCode(rs.getString("bookcode"));
 				vo.setReturnDate(rs.getDate("returndate"));
 				list.add(vo);
 			}
@@ -34,8 +34,82 @@ public class BookRentalDao extends DAO{
 		}finally {
 			close();
 		}
-		return null;
+		return list;
 	}
+	
+	public BookRentalVo selMem(BookRentalVo vo, MemberVo vm) {
+		String sql = "select m.memberid, m.membername, b.bookcode, r.rentaldate, r.returndate\r\n"
+				+ "from book b JOIN bookrental r\r\n"
+				+ "ON(b.bookcode = r.bookcode)\r\n"
+				+ "JOIN mem m\r\n"
+				+ "ON(m.memberid = r.memberid)\r\n"
+				+ "where m.memberid = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getmId());
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new BookRentalVo();
+				vo.setRentalDate(rs.getDate("rentaldate"));
+				vo.setbCode(rs.getString("bookcode"));
+				vm.setmId(rs.getString("memberid"));
+				vo.setReturnDate(rs.getDate("returndate"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return vo;
+	}
+	
+		
+		//대여 렌탈테이블에 등록
+		public int insert(BookRentalVo vo) {
+			int n = 0;
+			String sql = "insert into BookRental(rentaldate, bookcode, mid) values(sysdate, ?, ?)";
+			try {
+				psmt = conn.prepareStatement(sql);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+			return n;
+		}
+		
+		//대여하면 수량 -1
+		public int upCount(BookVo vo) {
+		      int n = 0;
+		      String sql = "UPDATE BOOK SET BCOUNT = BCOUNT - 1 WHERE BOOKCODE = ?";
+		      try {
+		         psmt = conn.prepareStatement(sql);
+		         psmt.setString(1, vo.getbCode());
+		         n = psmt.executeUpdate();
+		      }catch(SQLException e) {
+		         e.printStackTrace();
+		      }finally {
+		         close();
+		      }
+		      return n;
+		   }
+		
+		//반납하면 수량+1
+		public int downCount(BookVo vo) {
+		      int n = 0;
+		      String sql = "UPDATE BOOK SET BCOUNT = BCOUNT + 1 WHERE BOOKCODE = ?";
+		      try {
+		         psmt = conn.prepareStatement(sql);
+		         psmt.setString(1, vo.getbCode());
+		         n = psmt.executeUpdate();
+		      }catch(SQLException e) {
+		         e.printStackTrace();
+		      }finally {
+		         close();
+		      }
+		      return n;
+		   }
+		
 		
 	
 	private void close() {

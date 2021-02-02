@@ -1,3 +1,4 @@
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -25,7 +26,6 @@
 			<tr>
 				<th width="100">회원 아이디</th>
 				<th width="100">회원명</th>
-				<th width="100">회원 비밀번호</th>
 				<th width="100">전화번호</th>
 				<th width="100">주소</th>
 				<th width="100">권한</th>
@@ -36,7 +36,6 @@
 			<tr class="row">
 				<td align="center">${vo.mId }</td>
 				<td align="center">${vo.mName }</td>
-				<td align="center">${vo.mPass }</td>
 				<td align="center">${vo.mTel }</td>
 				<td align="center">${vo.mAdd }</td>
 				<td align="center">${vo.mAu }</td>
