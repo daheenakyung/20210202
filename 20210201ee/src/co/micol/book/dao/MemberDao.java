@@ -117,15 +117,15 @@ public class MemberDao extends DAO {
 
 	// 로그인
 	public MemberVo login(MemberVo vo) {
-		String sql = "SELECT * FROM MEM WHERE MEMBERID = ?";
+		String sql = "SELECT * FROM MEM WHERE MEMBERID = ? AND MEMBERPASSWORD=?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getmId());
+			psmt.setString(2, vo.getmPass());
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				vo.setmName(rs.getString("MEMBERNAME"));
 				vo.setmAu(rs.getString("MEMBERAU"));
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

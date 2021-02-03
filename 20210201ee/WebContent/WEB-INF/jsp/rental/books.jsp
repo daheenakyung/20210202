@@ -11,6 +11,7 @@
 	<form id = "frm" name = "frm" method = "post">
 		<table border = "1">
 			<tr style="background-color : silver">
+				<th width="100">책 번호</th>
 				<th width="100">책 제목</th>
 				<th width="100">회원 아이디</th>
 				<th width="100">대여일자</th>
@@ -20,6 +21,7 @@
 			<c:if test="${vo.returnDate eq null }">
 			<tr>
 				<td align="center">${vo.bCode}</td>
+				<td align="center">${vo.bName}</td>
 				<td align="center">${vo.mId}</td>
 				<td align="center">${vo.rentalDate }</td>
 				<td align="center">${vo.returnDate }</td>

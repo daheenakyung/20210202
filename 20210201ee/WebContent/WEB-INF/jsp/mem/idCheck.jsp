@@ -16,8 +16,8 @@
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 </div>
 	<div align="center">
-		<h3>${msg }</h3>
-		<button type="button" onclick="formClose()">확인</button>
+		<h3>${msg }</h3>${check }
+		<button type="button" onclick="formClose(${check })">확인</button>
 	</div>
 </body>
 </html>

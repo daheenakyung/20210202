@@ -20,7 +20,7 @@
 		<div>
 			<h1>내 대여목록</h1>
 		</div>
-	<form id="frm" name="frm" method="post">
+	<form id="frm" name="frm" action = "booksUser.do" method="post">
 		<table border="1">
 			<tr>
 				<th width="100">도서 코드</th>
@@ -41,7 +41,8 @@
 							onclick="reBook('${vo.bCode}')">반납</button></td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table><br/>
+		<button type="submit">미반납 도서</button>
 	</form>
 </div>
 </body>

@@ -17,7 +17,7 @@ public class BookRentalDao extends DAO{
 	public ArrayList<BookRentalVo> masSelect(){
 		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
 		BookRentalVo vo = new BookRentalVo();
-		String sql = "SELECT * FROM MEM A, BOOKRENTAL B WHERE A.MEMBERID = B.MEMBERID";
+		String sql = "SELECT * FROM MYBOOK";
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
@@ -26,6 +26,7 @@ public class BookRentalDao extends DAO{
 				vo.setRentalDate(rs.getDate("rentaldate"));
 				vo.setmId(rs.getString("memberid"));
 				vo.setbCode(rs.getString("bookcode"));
+				vo.setbName(rs.getString("bookname"));
 				vo.setReturnDate(rs.getDate("returndate"));
 				list.add(vo);
 			}
@@ -46,6 +47,7 @@ public class BookRentalDao extends DAO{
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				vo = new BookRentalVo();
+				vo.setBookN(rs.getInt("booknumber"));
 				vo.setbCode(rs.getString("bookcode"));
 				vo.setmId(rs.getString("memberid"));
 				vo.setRentalDate(rs.getDate("rentaldate"));
@@ -111,22 +113,8 @@ public class BookRentalDao extends DAO{
 	      }
 	      return n;
 	   }
-	
-	public int delete(BookRentalVo vo) {
-		int n = 0;
-		String sql = "DELETE FROM BOOKRENTAL WHERE BOOKNUMBER = ?";
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, vo.getBookN());
-			n = psmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		return n;
-	}
-	
+
+	// 반납 등록
 	public int upReturn(BookRentalVo vo) {
 		int n = 0;
 		String sql = "UPDATE BOOKRENTAL SET  RETURNDATE = SYSDATE WHERE BOOKNUMBER = ?";
