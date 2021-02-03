@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.micol.book.common.Command;
 import co.micol.book.dao.BookRentalDao;
@@ -18,17 +19,24 @@ public class UpCount implements Command {
 		// TODO 대여
 		BookVo vo = new BookVo();
 		BookRentalDao dao = new BookRentalDao();
+		
 		vo.setbCode(requset.getParameter("row"));
+		dao.upCount(vo);
 		
-		int n = dao.upCount(vo);
+		requset.setAttribute("vo", vo);
+		
 		//insert
+		BookRentalDao daob = new BookRentalDao();
 		BookRentalVo vb = new BookRentalVo();
-		vb.setbCode(requset.getParameter("vo.bCode"));
-		dao = new BookRentalDao();
-		n = dao.insertR(vb);
-		System.out.println(requset.getParameter("mId"));
+		vb.setbCode(vo.getbCode());
 		
-		return "bookForm.do";
+		HttpSession session = requset.getSession();
+		String value = (String) session.getAttribute("mid");
+		vb.setmId(value);
+		
+		int n = daob.insert(vb);
+		
+		return "user.do";
 	}
 
 }

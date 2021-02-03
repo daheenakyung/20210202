@@ -37,19 +37,19 @@ public class BookRentalDao extends DAO{
 		return list;
 	}
 	
-	public ArrayList<BookRentalVo> selMem(String id) {
+	public ArrayList<BookRentalVo> selMem(BookRentalVo vo) {
 		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
-		BookRentalVo vo = new BookRentalVo();
-		String sql = "SELECT * FROM MEM A, BOOKRENTAL B WHERE A.MEMBERID = B.MEMBERID AND A.MEMBERID = ?";
+		String sql = "SELECT * FROM MYBOOK WHERE MEMBERID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
+			psmt.setString(1, vo.getmId());
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				vo = new BookRentalVo();
-				vo.setRentalDate(rs.getDate("rentaldate"));
 				vo.setbCode(rs.getString("bookcode"));
 				vo.setmId(rs.getString("memberid"));
+				vo.setRentalDate(rs.getDate("rentaldate"));
+				vo.setbName(rs.getString("bookname"));
 				vo.setReturnDate(rs.getDate("returndate"));
 				list.add(vo);
 			}
@@ -63,11 +63,14 @@ public class BookRentalDao extends DAO{
 	
 		
 		//대여 렌탈테이블에 등록
-		public int insert(BookRentalVo vo) {
+		public int insert(BookRentalVo vb) {
 			int n = 0;
-			String sql = "insert into BookRental(rentaldate, bookcode, mid) values(sysdate, ?, ?)";
+			String sql = "INSERT INTO BOOKRENTAL(BOOKNUMBER, BOOKCODE, MEMBERID) VALUES(BOOKSEQ.NEXTVAL, ?, ?)";
 			try {
 				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, vb.getbCode());
+				psmt.setString(2, vb.getmId());
+				n = psmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
@@ -109,21 +112,34 @@ public class BookRentalDao extends DAO{
 	      return n;
 	   }
 	
-	public int insertR(BookRentalVo vo) {
+	public int delete(BookRentalVo vo) {
 		int n = 0;
-		String sql = "insert into bookrental(booknumber, bookcode, memberid, rentaldate) values(bookseq.nextval, ?, ?, ?)";
+		String sql = "DELETE FROM BOOKRENTAL WHERE BOOKNUMBER = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getbCode());
-			psmt.setString(2, vo.getmId());
-			psmt.setDate(3, vo.getReturnDate());
+			psmt.setInt(1, vo.getBookN());
 			n = psmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return n ;
+		return n;
+	}
+	
+	public int upReturn(BookRentalVo vo) {
+		int n = 0;
+		String sql = "UPDATE BOOKRENTAL SET  RETURNDATE = SYSDATE WHERE BOOKNUMBER = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getBookN());
+			n = psmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return n;
 	}
 	
 	

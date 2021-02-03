@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BookRentalVo {
 	private int bookN;
+	private String bName;
 	private Date rentalDate;
 	private String bCode;
 	private String mId;
@@ -38,6 +39,12 @@ public class BookRentalVo {
 	}
 	public void setBookN(int bookN) {
 		this.bookN = bookN;
+	}
+	public String getbName() {
+		return bName;
+	}
+	public void setbName(String bName) {
+		this.bName = bName;
 	}
 	
 	

@@ -30,6 +30,8 @@ tr.row:hover {
 <div align="center">
 	<div><h1>도서 목록</h1></div>
 	<form id = "frm" name = "frm" method = "post">
+	<input type="hidden" id = "mid" name = "mid" value = "${mid }">
+	
 		<table border = "1">
 			<tr style="background-color : silver">
 				<th width="100">도서 코드</th>

@@ -18,28 +18,21 @@ public class User implements Command {
 	@Override
 	public String exec(HttpServletRequest requset, HttpServletResponse response) {
 		// TODO 회원별 조회
-		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
-		BookRentalVo vo = new BookRentalVo();
 		BookRentalDao dao = new BookRentalDao();
-		vo.setmId(requset.getParameter("id"));
+		BookRentalVo vo = new BookRentalVo();
+		ArrayList<BookRentalVo> list = new ArrayList<BookRentalVo>();
+		
+		vo.setbCode(requset.getParameter("row"));
+		
+		
 		HttpSession session = requset.getSession();
-		String id = (String) session.getAttribute("mid");
-		String auth = (String) session.getAttribute("auth");
+		String value = (String)session.getAttribute("mid");
+
+		vo.setmId(value);
 		
-		/*
-		 * if(auth.equals("MASTER")) list = dao.selMem(); else list = dao.selMem(id);
-		 */
-		
+		list = dao.selMem(vo);
 		requset.setAttribute("list", list);
-		/*
-		 * vo = dao.selMem(vo); dao = new BookRentalDao(); ArrayList<BookRentalVo> list
-		 * = new ArrayList<BookRentalVo>(); list = dao.masSelect();
-		 * requset.setAttribute("vo", vo);
-		 */
-		/*
-		 * if(vo.getmAu() == "USER") { HttpSession session = requset.getSession();
-		 * session.setAttribute("mId", vo.getmId()); requset.setAttribute("vo", vo); }
-		 */
+		
 		
 		return "rentaluser/userForm";
 	}
